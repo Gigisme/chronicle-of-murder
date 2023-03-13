@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
@@ -9,6 +12,14 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private float ySens = 30f;
     
     private float _xRotation = 0f;
+    private bool cursorLocked = false;
+
+    // Toggle cursors with Esc, need to click into the game
+    public void ToggleCursor()
+    {
+        cursorLocked = !cursorLocked;
+        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+    }
 
     public void ProcessLook(Vector2 input)
     {
@@ -21,6 +32,6 @@ public class PlayerLook : MonoBehaviour
         //apply rotation to cam
         cam.transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
         //rotate player to look left and right
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSens);
+        transform.Rotate( (mouseX * Time.deltaTime) * xSens * Vector3.up);
     }
 }

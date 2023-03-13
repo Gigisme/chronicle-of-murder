@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
         _motor = GetComponent<PlayerMotor>();
         _onFoot.Jump.performed += ctx => _motor.Jump();
         _look = GetComponent<PlayerLook>();
+        _onFoot.ToggleCursor.performed += ctx => _look.ToggleCursor();
     }
     
     void FixedUpdate()
