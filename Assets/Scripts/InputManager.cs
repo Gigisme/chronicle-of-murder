@@ -8,9 +8,9 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput _playerInput;
 
-    private PlayerInput.OnFootActions _onFoot;
+    public PlayerInput.OnFootActions _onFoot;
 
-    private PlayerMovement _motor;
+    private PlayerMovement _playerMovement;
 
     private PlayerLook _look;
 
@@ -19,8 +19,8 @@ public class InputManager : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _onFoot = _playerInput.OnFoot;
-        _motor = GetComponent<PlayerMovement>();
-        _onFoot.Jump.performed += ctx => _motor.Jump();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _onFoot.Jump.performed += ctx => _playerMovement.Jump();
         _look = GetComponent<PlayerLook>();
         _onFoot.ToggleCursor.performed += ctx => _look.ToggleCursor();
     }
@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     void FixedUpdate()
     {
         //move player using value from input movement action
-        _motor.ProcessMove(_onFoot.Movement.ReadValue<Vector2>());
+        _playerMovement.ProcessMove(_onFoot.Movement.ReadValue<Vector2>());
     }
 
     private void LateUpdate()
