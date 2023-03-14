@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerInput.OnFootActions _onFoot;
 
-    private PlayerMotor _motor;
+    private PlayerMovement _motor;
 
     private PlayerLook _look;
 
@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     {
         _playerInput = new PlayerInput();
         _onFoot = _playerInput.OnFoot;
-        _motor = GetComponent<PlayerMotor>();
+        _motor = GetComponent<PlayerMovement>();
         _onFoot.Jump.performed += ctx => _motor.Jump();
         _look = GetComponent<PlayerLook>();
         _onFoot.ToggleCursor.performed += ctx => _look.ToggleCursor();
