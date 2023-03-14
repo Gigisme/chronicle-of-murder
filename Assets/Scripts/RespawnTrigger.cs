@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour
+public class RespawnTrigger : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
