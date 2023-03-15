@@ -7,11 +7,8 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput _playerInput;
-
     public PlayerInput.OnFootActions _onFoot;
-
     private PlayerMovement _playerMovement;
-
     private PlayerLook _look;
 
     // initialize

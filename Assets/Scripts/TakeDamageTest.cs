@@ -6,8 +6,8 @@ public class TakeDamageTest : Interactable
 {
    [SerializeField] private GameObject player;
 
-protected override void Interact()
-{
-   player.GetComponent<Health>().TakeDamage(20);
-}
+   protected override void Interact()
+   {
+      player.GetComponent<Health>().TakeDamage(20);
+   }
 }

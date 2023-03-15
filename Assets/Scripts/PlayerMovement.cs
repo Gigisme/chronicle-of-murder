@@ -6,21 +6,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController _controller;
-    private bool isGrounded;
-    private Vector3 playerVelocity;
-    private RaycastHit hitForward;
-    private RaycastHit hitBackward;
-    private RaycastHit hitRight;
-    private RaycastHit hitLeft;
-    private Vector3 wallNormal;
-    private bool detectedForward, detectedBackward, detectedRight, detectedLeft;
+    private bool _isGrounded;
+    private Vector3 _playerVelocity;
+    private RaycastHit _hitForward, _hitBackward, _hitRight, _hitLeft;
+    private Vector3 _wallNormal;
+    private bool _detectedForward, _detectedBackward, _detectedRight, _detectedLeft;
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private float fallingMultiplier = 2.5f;
     [SerializeField] private float wallJumpHeight = 3f;
-    [SerializeField] private float wallJumpDistance = 3f;
 
     public void Awake()
     {
@@ -29,11 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
-        isGrounded = _controller.isGrounded;
+        _isGrounded = _controller.isGrounded;
         CardinalRaycast();
     }
     
-    // TODO - slide
     //receive inputs for InputManager.cs and apply them to player
     public void ProcessMove(Vector2 input)
     {
@@ -45,37 +40,33 @@ public class PlayerMovement : MonoBehaviour
         _controller.Move( speed * Time.deltaTime * transform.TransformDirection(moveDirection));
         //Gravity
         
-        if (playerVelocity.y < 0)
+        if (_playerVelocity.y < 0)
         {
-            playerVelocity.y += fallingMultiplier * gravity * Time.deltaTime;
+            _playerVelocity.y += fallingMultiplier * gravity * Time.deltaTime;
         }
         else
         {
-            playerVelocity.y += gravity * Time.deltaTime;
+            _playerVelocity.y += gravity * Time.deltaTime;
         }
         //Jump
-        if (isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = -2f;
+        if (_isGrounded && _playerVelocity.y < 0)
+            _playerVelocity.y = -2f;
         
-        _controller.Move(playerVelocity * Time.deltaTime);
+        _controller.Move(_playerVelocity * Time.deltaTime);
     }
-
-    // TODO - cooldown on wall jump
-    // TODO - wallrunning
+    
     public void Jump()
     {
-        if (isGrounded)
+        if (_isGrounded)
         {
-            playerVelocity.y = 0;
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -gravity);
+            _playerVelocity.y = 0;
+            _playerVelocity.y = Mathf.Sqrt(jumpHeight * -gravity);
         }
 
         if (TouchingWall())
         {
-            playerVelocity.y = 0;
-            playerVelocity.y = Mathf.Sqrt(wallJumpHeight * -gravity);
-            // TODO - get a small shove away from the wall, this doesnt seem to work as intended
-            // playerVelocity += wallNormal * wallJumpDistance * Time.deltaTime;
+            _playerVelocity.y = 0;
+            _playerVelocity.y = Mathf.Sqrt(wallJumpHeight * -gravity);
         }
     }
 
@@ -83,29 +74,29 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 position = transform.position;
         float castDistance = 1f;
-        detectedForward = Physics.Raycast(new Ray(position, transform.forward), out hitForward, castDistance);
-        detectedBackward = Physics.Raycast(new Ray(position, -transform.forward), out hitBackward, castDistance);
-        detectedRight = Physics.Raycast(new Ray(position, transform.right), out hitRight, castDistance);
-        detectedLeft = Physics.Raycast(new Ray(position, -transform.right), out hitLeft, castDistance);
+        _detectedForward = Physics.Raycast(new Ray(position, transform.forward), out _hitForward, castDistance);
+        _detectedBackward = Physics.Raycast(new Ray(position, -transform.forward), out _hitBackward, castDistance);
+        _detectedRight = Physics.Raycast(new Ray(position, transform.right), out _hitRight, castDistance);
+        _detectedLeft = Physics.Raycast(new Ray(position, -transform.right), out _hitLeft, castDistance);
     }
     
     private bool TouchingWall()
     {
-        if (detectedForward && hitForward.collider.CompareTag("Wall"))
+        if (_detectedForward && _hitForward.collider.CompareTag("Wall"))
         {
-            wallNormal = hitForward.normal;
+            _wallNormal = _hitForward.normal;
             return true;
-        } else if (detectedBackward && hitBackward.collider.CompareTag("Wall"))
+        } else if (_detectedBackward && _hitBackward.collider.CompareTag("Wall"))
         {
-            wallNormal = hitBackward.normal;
+            _wallNormal = _hitBackward.normal;
             return true;
-        } else if (detectedLeft && hitLeft.collider.CompareTag("Wall"))
+        } else if (_detectedLeft && _hitLeft.collider.CompareTag("Wall"))
         {
-            wallNormal = hitLeft.normal;
+            _wallNormal = _hitLeft.normal;
             return true;
-        } else if (detectedRight && hitRight.collider.CompareTag("Wall"))
+        } else if (_detectedRight && _hitRight.collider.CompareTag("Wall"))
         {
-            wallNormal = hitRight.normal;
+            _wallNormal = _hitRight.normal;
             return true;
         }
 

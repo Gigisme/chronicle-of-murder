@@ -27,4 +27,9 @@ public class Health : MonoBehaviour
         }
     }
 
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
+
 }
