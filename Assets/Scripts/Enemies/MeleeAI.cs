@@ -2,16 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MeleeAI : EnemyAI
 {
     [SerializeField] private float speed;
     [SerializeField] private float damage;
     private bool isTriggered;
+    private NavMeshAgent _navMeshAgent;
+
+    private void Awake()
+    {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshAgent.speed = speed;
+    }
 
     protected override void Chase()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        _navMeshAgent.SetDestination(player.transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +40,6 @@ public class MeleeAI : EnemyAI
 
     protected override void Attack()
     {
-        Debug.Log("attacking");
         if (isTriggered)
         {
             player.GetComponent<Health>().TakeDamage(damage);

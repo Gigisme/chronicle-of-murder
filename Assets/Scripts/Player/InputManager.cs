@@ -17,15 +17,22 @@ public class InputManager : MonoBehaviour
         _playerInput = new PlayerInput();
         _onFoot = _playerInput.OnFoot;
         _playerMovement = GetComponent<PlayerMovement>();
-        _onFoot.Jump.performed += ctx => _playerMovement.Jump();
+        _onFoot.Jump.performed += ctx =>
+        {
+            _playerMovement.Jump();
+            _playerMovement.StopSliding();
+        };
         _look = GetComponent<PlayerLook>();
         _onFoot.ToggleCursor.performed += ctx => _look.ToggleCursor();
+        _onFoot.Slide.started += ctx => _playerMovement.StartSliding();
+        _onFoot.Slide.canceled += ctx => _playerMovement.StopSliding();
     }
     
     void FixedUpdate()
     {
         //move player using value from input movement action
         _playerMovement.ProcessMove(_onFoot.Movement.ReadValue<Vector2>());
+        
     }
 
     private void LateUpdate()

@@ -43,15 +43,11 @@ public abstract class EnemyAI : MonoBehaviour
                 Idle();
                 break;
             case EnemyState.Chase:
-                // Look at player
-                transform.LookAt(player.transform);
                 Chase();
                 break;
             case EnemyState.Attack:
                 if (canAttack)
                 {
-                    // Look at player
-                    transform.LookAt(player.transform);
                     Attack();
                     StartCoroutine(AttackCooldown());
                 }

@@ -23,7 +23,6 @@ public class Health : MonoBehaviour
         }
         else
         {
-            Debug.Log("Current health: " + currentHealth);
         }
     }
 
