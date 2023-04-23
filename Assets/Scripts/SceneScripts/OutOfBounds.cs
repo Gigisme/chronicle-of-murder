@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RespawnTrigger : MonoBehaviour
+public class OutOfBounds : MonoBehaviour
 {
 
     private void OnTriggerEnter(Collider other)
@@ -11,6 +11,10 @@ public class RespawnTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Respawn>().Spawn();
+        }
+        else
+        {
+            Destroy(other.gameObject);
         }
     }
 }
