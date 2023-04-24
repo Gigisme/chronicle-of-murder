@@ -17,16 +17,17 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Wall Jump Settings")]
     [SerializeField] private float wallJumpHeight = 3f;
-    private RaycastHit _hitForward, _hitBackward, _hitRight, _hitLeft;
-    private Vector3 _wallNormal;
-    private bool _detectedForward, _detectedBackward, _detectedRight, _detectedLeft;
-    
+    [SerializeField] private int wallJumpCount = 2;
+    private int maxWallJumpCount;
+    private bool _isTouchingWall;
+    //private Vector3 _wallNormal;
+
     [Header("Slide Settings")]
     [SerializeField] private float slideSpeed;
     [SerializeField] private float slideTime;
     [SerializeField] private float slideYScale;
     private float startYScale;
-    private bool sliding = false;
+    private bool sliding;
     private float maxSlideTime;
     private float startSpeed;
     private Vector3 slideDirection;
@@ -40,14 +41,30 @@ public class PlayerMovement : MonoBehaviour
         maxSlideTime = slideTime;
         startSpeed = speed;
         slideDirection = Vector3.zero;
+        maxWallJumpCount = wallJumpCount;
     }
 
-    public void Update()
+    private void Update()
     {
         _isGrounded = _controller.isGrounded;
-        CardinalRaycast();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            _isTouchingWall = true;
+        }
     }
     
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            _isTouchingWall = false;
+        }
+    }
+
     //receive inputs for InputManager.cs and apply them to player
     public void ProcessMove(Vector2 input)
     {
@@ -90,51 +107,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isGrounded)
         {
+            wallJumpCount = maxWallJumpCount;
             _playerVelocity.y = 0;
             _playerVelocity.y = Mathf.Sqrt(jumpHeight * -gravity);
         }
-
-        if (TouchingWall())
+        else if (_isTouchingWall && wallJumpCount > 0)
         {
+            wallJumpCount--;
             _playerVelocity.y = 0;
             _playerVelocity.y = Mathf.Sqrt(wallJumpHeight * -gravity);
         }
     }
 
-
-    private void CardinalRaycast()
-    {
-        Vector3 position = transform.position;
-        float castDistance = 1f;
-        _detectedForward = Physics.Raycast(new Ray(position, transform.forward), out _hitForward, castDistance);
-        _detectedBackward = Physics.Raycast(new Ray(position, -transform.forward), out _hitBackward, castDistance);
-        _detectedRight = Physics.Raycast(new Ray(position, transform.right), out _hitRight, castDistance);
-        _detectedLeft = Physics.Raycast(new Ray(position, -transform.right), out _hitLeft, castDistance);
-    }
-    
-    private bool TouchingWall()
-    {
-        if (_detectedForward && _hitForward.collider.CompareTag("Wall"))
-        {
-            _wallNormal = _hitForward.normal;
-            return true;
-        } else if (_detectedBackward && _hitBackward.collider.CompareTag("Wall"))
-        {
-            _wallNormal = _hitBackward.normal;
-            return true;
-        } else if (_detectedLeft && _hitLeft.collider.CompareTag("Wall"))
-        {
-            _wallNormal = _hitLeft.normal;
-            return true;
-        } else if (_detectedRight && _hitRight.collider.CompareTag("Wall"))
-        {
-            _wallNormal = _hitRight.normal;
-            return true;
-        }
-
-        return false;
-    }
-    
     public void StartSliding()
     {
        sliding = true;
