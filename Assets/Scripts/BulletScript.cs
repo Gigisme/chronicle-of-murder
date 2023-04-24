@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackObjectScript : MonoBehaviour
+public class BulletScript : MonoBehaviour
 {
+    private Rigidbody rb;
     private float timer;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -16,14 +22,14 @@ public class AttackObjectScript : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
 
-        if (other.gameObject.CompareTag("Target"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             //other.gameObject.GetComponent<enemyHealth>().health -= 20;
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
     }
 }
