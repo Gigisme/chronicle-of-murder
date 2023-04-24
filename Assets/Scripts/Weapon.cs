@@ -4,18 +4,32 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Transform attackObjectSpawn;
-    public GameObject attackObjectPrefab;
-    public float attackObjectSpeed = 5f;
-    public float attackNumber = 5;
-
+    [SerializeField] private Transform attackObjectSpawn;
+    [SerializeField] private GameObject attackObjectPrefab;
+    [SerializeField] private float attackObjectSpeed = 5f;
+    [SerializeField] private float attackNumber = 5;
+    private float attackTime = 0;
+   
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && attackNumber > 0)
+        if (attackTime <= 0)
         {
-            var attackObject = Instantiate(attackObjectPrefab, attackObjectSpawn.position, attackObjectSpawn.rotation);
-            attackObject.GetComponent<Rigidbody>().velocity = attackObjectSpawn.forward * attackObjectSpeed;
-            attackNumber--;
+            if (Input.GetKey(KeyCode.Mouse0) && attackNumber > 0)
+            {
+                var attackObject = Instantiate(attackObjectPrefab, attackObjectSpawn.position, attackObjectSpawn.rotation);
+                attackObject.GetComponent<Rigidbody>().velocity = attackObjectSpawn.forward * attackObjectSpeed;
+                attackNumber--;
+                attackTime = 0.5f;
+            }
         }
+        else
+        {
+            attackTime -= Time.deltaTime;
+        }
+    }
+
+    public float AttackNumber() 
+    {
+        return attackNumber;
     }
 }

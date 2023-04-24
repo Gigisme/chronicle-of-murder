@@ -7,12 +7,15 @@ public class BulletNumberScript : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private TMP_Text number;
+    private Weapon weapon;
 
-
-    void Update()
+    private void Awake()
     {
-        float bulletNumber = player.GetComponent<Weapon>().attackNumber;
-        number.text = "Bullets: " + bulletNumber;
+        weapon = player.GetComponent<Weapon>();
+    }
 
+    private void Update()
+    {
+        number.text = "Bullets: " + weapon.AttackNumber();
     }
 }
