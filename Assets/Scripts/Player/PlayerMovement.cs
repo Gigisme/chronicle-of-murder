@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded;
     private Vector3 _playerVelocity;
     private Vector3 _playerScale;
+    private Renderer renderer;
     
     [Header("Wall Jump Settings")]
     [SerializeField] private float wallJumpHeight = 3f;
@@ -42,11 +43,22 @@ public class PlayerMovement : MonoBehaviour
         startSpeed = speed;
         slideDirection = Vector3.zero;
         maxWallJumpCount = wallJumpCount;
+        renderer = GetComponent<Renderer>();
     }
 
-    private void Update()
+    public void Update()
     {
         _isGrounded = _controller.isGrounded;
+        
+        //Stop jump early
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, renderer.bounds.size.y / 2 + 0.1f))
+        {
+            if (_playerVelocity.y > 0)
+            {
+                _playerVelocity.y = 0;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
