@@ -125,9 +125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   gravity: -20.6
-  jumpHeight: 10
+  jumpHeight: 5
   fallingMultiplier: 2.5
-  wallJumpHeight: 7
+  wallJumpHeight: 5
   wallJumpCount: 2
   slideSpeed: 20
   slideTime: 0.7
