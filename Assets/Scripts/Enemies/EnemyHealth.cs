@@ -8,8 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private EnemyHealthbar healthBar;
     [SerializeField] private float damage = 2f;
-   
-
+    
     void Start()
     {
         currentHealth = maxHealth;
@@ -20,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0) 
         {
-            Destroy(gameObject, 2);
+            Destroy(gameObject);
         }
         else
         {
