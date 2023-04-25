@@ -8,19 +8,20 @@ public class EnemyAttackObjectScript : MonoBehaviour
     private Health playerHealth;
     private Rigidbody rb;
     private float timer;
-    [SerializeField] private float damage = 2f;
+    [SerializeField] public float damage = 2f;
+    [SerializeField] private float duration;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        playerHealth = GetComponent<Health>();
+        playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if(timer > 10)
+        if(timer > duration)
         {
             Destroy(gameObject);
         }
@@ -28,7 +29,6 @@ public class EnemyAttackObjectScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        
         if (collision.gameObject.CompareTag("Player"))
         {
             playerHealth.TakeDamage(damage);

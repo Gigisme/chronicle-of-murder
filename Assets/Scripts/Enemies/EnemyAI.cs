@@ -8,7 +8,6 @@ public abstract class EnemyAI : MonoBehaviour
 {
     private EnemyState state;
     private bool canAttack;
-    [SerializeField] public Collider attackCollider;
     [SerializeField] private float chaseRange;
     [SerializeField] private float attackRange;
     [SerializeField] public GameObject player;
@@ -46,11 +45,18 @@ public abstract class EnemyAI : MonoBehaviour
                 Chase();
                 break;
             case EnemyState.Attack:
+            {
+                // Turn to player
+                Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0, directionToPlayer.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 15f);
+                
                 if (canAttack)
                 {
                     Attack();
                     StartCoroutine(AttackCooldown());
                 }
+            }
                 break;
             case EnemyState.Patrol:
                 Patrol();
