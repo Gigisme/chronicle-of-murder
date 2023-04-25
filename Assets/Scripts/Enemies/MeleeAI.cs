@@ -40,6 +40,7 @@ public class MeleeAI : EnemyAI
 
     protected override void Attack()
     {
+        Debug.Log("Attacking");
         if (isTriggered)
         {
             player.GetComponent<Health>().TakeDamage(damage);
