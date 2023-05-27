@@ -434,6 +434,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4605826192693333211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150070996298101680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.051446255, y: 0.037858512, z: 0.046088967}
+  m_Center: {x: -0.00010890907, y: 0.01878013, z: 0.030800322}
+--- !u!65 &4605826192693333219
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150070996298101680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05144625, y: 0.02498922, z: 0.049680814}
+  m_Center: {x: -0.00010891075, y: 0.012345486, z: 0.00572304}
 --- !u!114 &2843501104893185757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,32 +498,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &4605826192693333211
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150070996298101680}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.051446255, y: 0.037858512, z: 0.035625007}
-  m_Center: {x: -0.00010890916, y: 0.01878013, z: 0.025569921}
---- !u!65 &4605826192693333219
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3150070996298101680}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.05144625, y: 0.02498922, z: 0.049680814}
-  m_Center: {x: -0.00010891075, y: 0.012345486, z: 0.00572304}
 --- !u!114 &4605826192693333210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRange: 10
-  attackRange: 2
+  attackRange: 2.5
   player: {fileID: 0}
   canPatrol: 0
   attackCooldown: 1

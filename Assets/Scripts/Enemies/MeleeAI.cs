@@ -40,7 +40,7 @@ public class MeleeAI : EnemyAI
 
     protected override void Attack()
     {
-        Debug.Log("Attacking");
+        _navMeshAgent.SetDestination(transform.position); // Stop moving
         if (isTriggered)
         {
             player.GetComponent<Health>().TakeDamage(damage);
