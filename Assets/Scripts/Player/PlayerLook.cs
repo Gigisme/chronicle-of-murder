@@ -12,14 +12,6 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private float ySens = 30f;
     
     private float _xRotation = 0f;
-    private bool cursorLocked = false;
-
-    // Toggle cursors with Esc, need to click into the game
-    public void ToggleCursor()
-    {
-        cursorLocked = !cursorLocked;
-        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-    }
 
     public void ProcessLook(Vector2 input)
     {

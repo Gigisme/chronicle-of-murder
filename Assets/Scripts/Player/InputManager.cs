@@ -10,20 +10,24 @@ public class InputManager : MonoBehaviour
     public PlayerInput.OnFootActions _onFoot;
     private PlayerMovement _playerMovement;
     private PlayerLook _look;
+    private PauseMenu _pauseMenu;
 
     // initialize
     void Awake()
     {
         _playerInput = new PlayerInput();
-        _onFoot = _playerInput.OnFoot;
+        _look = GetComponent<PlayerLook>();
         _playerMovement = GetComponent<PlayerMovement>();
+        _pauseMenu = GetComponent<PauseMenu>();
+
+        _onFoot = _playerInput.OnFoot;
         _onFoot.Jump.performed += ctx =>
         {
             _playerMovement.Jump();
             _playerMovement.StopSliding();
         };
-        _look = GetComponent<PlayerLook>();
-        _onFoot.ToggleCursor.performed += ctx => _look.ToggleCursor();
+        
+        _onFoot.Pause.performed += ctx => _pauseMenu.TogglePause();
         _onFoot.Slide.started += ctx => _playerMovement.StartSliding();
         _onFoot.Slide.canceled += ctx => _playerMovement.StopSliding();
     }
