@@ -47,12 +47,12 @@ GameObject:
   - component: {fileID: 9164342847654497498}
   - component: {fileID: 9164342847654497511}
   - component: {fileID: 9164342847654497519}
-  - component: {fileID: 9164342847654497515}
   - component: {fileID: 9164342847654497524}
   - component: {fileID: 386470614}
   - component: {fileID: 386470613}
   - component: {fileID: 1622198392}
   - component: {fileID: 1622198393}
+  - component: {fileID: 961420052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -208,19 +208,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &9164342847654497515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6735541724918142327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb0f95f18f714f01be10fc1082661fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 100
 --- !u!114 &9164342847654497524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +278,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf02a7d2200c8f50a613071293840eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 55717156498828441, guid: 1509e5c1784a8f0dfadc88b08d3ae376, type: 3}
+  pauseMenuUI: {fileID: 0}
+--- !u!114 &961420052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735541724918142327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb0f95f18f714f01be10fc1082661fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  ui: {fileID: 0}
 --- !u!1 &6735541726139870325
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,20 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private GameObject player;
+    [SerializeField] private Slider slider;
+    [SerializeField] private TextMeshProUGUI ammoText;
+    
+    public void SetMaxHealth(int health)
+    {
+        slider.maxValue = health;
+        slider.value = health;
+    }
+    
+    public void SetHealth(int health)
+    {
+        slider.value = health;
+    }
+    
+    private void FormatAmmoText(int loaded, int total)
+    {
+        ammoText.text = loaded + "/" + total;
+    }
 
-    private void Start()
+    public void SetAmmo(int loaded, int total)
     {
-        healthText.text = "Health: " + player.GetComponent<Health>().GetHealth();
+        FormatAmmoText(loaded, total);
     }
-    private void Update()
-    {
-        healthText.text = "Health: " + player.GetComponent<Health>().GetHealth();
-    }
+
 }
