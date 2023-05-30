@@ -24,7 +24,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected virtual void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
+        
         if (distanceToPlayer <= chaseRange && distanceToPlayer > attackRange)
         {
             state = EnemyState.Chase;

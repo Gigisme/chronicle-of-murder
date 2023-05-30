@@ -7,8 +7,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float maxHealth = 5;
     public float currentHealth;
     [SerializeField] private EnemyHealthbar healthBar;
-    [SerializeField] private float damage = 2f;
-    
+    [SerializeField] private int experienceWorth;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0) 
         {
+            GetComponentInParent<EnemyAI>().player.GetComponentInChildren<Experience>().GainExperience(experienceWorth);
             Destroy(gameObject);
         }
         else
@@ -31,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            currentHealth -= damage;
+            currentHealth -= GetComponentInParent<EnemyAI>().player.GetComponentInChildren<Weapon>().GetDamage();
         }
     }
 }

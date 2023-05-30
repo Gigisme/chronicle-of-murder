@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class EnemyAttackObjectScript : MonoBehaviour
 {
-    private Health playerHealth;
+    private PlayerHealth playerHealth;
     private Rigidbody rb;
     private float timer;
-    [SerializeField] public float damage = 2f;
-    [SerializeField] private float duration;
+    [SerializeField] public int damage = 2;
+    [SerializeField] private float duration = 2;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
+        playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     void Update()

@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 public class RangedAI : EnemyAI
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     [SerializeField] private Transform attackObjectSpawn;
     [SerializeField] private GameObject attackObject;
     [SerializeField] private float attackObjectSpeed;

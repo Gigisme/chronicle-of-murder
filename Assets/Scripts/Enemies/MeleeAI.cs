@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class MeleeAI : EnemyAI
 {
     [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
     private bool isTriggered;
     private NavMeshAgent _navMeshAgent;
 
@@ -43,7 +43,7 @@ public class MeleeAI : EnemyAI
         _navMeshAgent.SetDestination(transform.position); // Stop moving
         if (isTriggered)
         {
-            player.GetComponent<Health>().TakeDamage(damage);
+            player.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 }
