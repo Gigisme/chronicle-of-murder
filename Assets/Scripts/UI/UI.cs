@@ -7,18 +7,19 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider experienceSlider;
     [SerializeField] private TextMeshProUGUI ammoText;
     
     public void SetMaxHealth(int health)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
     }
     
     public void SetHealth(int health)
     {
-        slider.value = health;
+        healthSlider.value = health;
     }
     
     private void FormatAmmoText(int loaded, int total)
@@ -29,6 +30,16 @@ public class UI : MonoBehaviour
     public void SetAmmo(int loaded, int total)
     {
         FormatAmmoText(loaded, total);
+    }
+    
+    public void SetMaxExperience(int experience)
+    {
+        experienceSlider.maxValue = experience;
+    }
+    
+    public void SetExperience(int experience)
+    {
+        experienceSlider.value = experience;
     }
 
 }

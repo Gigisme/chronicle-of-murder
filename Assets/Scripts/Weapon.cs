@@ -7,11 +7,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform attackObjectSpawn;
     [SerializeField] private GameObject attackObjectPrefab;
     [SerializeField] private float attackObjectSpeed = 5f;
+    [SerializeField] private int damage;
     [SerializeField] private int maxLoadedAmmo;
     [SerializeField] private int maxTotalAmmo;
     [SerializeField] private float reloadTime;
     [SerializeField] private UI ui;
     [SerializeField] Animator animator;
+    [SerializeField] private float attackTimeBase;
     private int loadedAmmo;
     private int totalAmmo;
     private float attackTime = 0;
@@ -51,7 +53,7 @@ public class Weapon : MonoBehaviour
                 var attackObject = Instantiate(attackObjectPrefab, attackObjectSpawn.position, attackObjectSpawn.rotation);
                 attackObject.GetComponent<Rigidbody>().velocity = attackObjectSpawn.forward * attackObjectSpeed;
                 loadedAmmo--;
-                attackTime = 0.5f;
+                attackTime = attackTimeBase;
             }
             else
             {
@@ -72,6 +74,11 @@ public class Weapon : MonoBehaviour
         ui.SetAmmo(loadedAmmo, totalAmmo);
     }
     
+    public int GetDamage()
+    {
+        return damage;
+    }
+
     public void AddAmmo(int ammoAmount)
     {
         totalAmmo = Mathf.Clamp(totalAmmo + ammoAmount, 0, maxTotalAmmo);
@@ -81,6 +88,16 @@ public class Weapon : MonoBehaviour
     public bool IsFullAmmo()
     {
         return totalAmmo == maxTotalAmmo;
+    }
+    
+    public void UpgradeAttackSpeed(float speed)
+    {
+        attackTime -= speed;
+    }
+    
+    public void UpgradeAttackDamage(int damage)
+    {
+        
     }
 
     IEnumerator Reload()
