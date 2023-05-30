@@ -278,26 +278,10 @@ PrefabInstance:
       propertyPath: ui
       value: 
       objectReference: {fileID: 243495532}
-    - target: {fileID: 961420052, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
-      propertyPath: startingHealth
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1622198392, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
       propertyPath: ui
       value: 
       objectReference: {fileID: 243495532}
-    - target: {fileID: 1622198392, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
-      propertyPath: reloadTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1622198392, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
-      propertyPath: maxTotalAmmo
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1622198392, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
-      propertyPath: maxLoadedAmmo
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1622198393, guid: 865eb87a981ba02c6a891745d548c1fb, type: 3}
       propertyPath: pauseMenuUI
       value: 
@@ -381,7 +365,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23988
+  m_Name: pb_Mesh23992
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2292,7 +2276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 55717156498828441, guid: 1509e5c1784a8f0dfadc88b08d3ae376, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1509e5c1784a8f0dfadc88b08d3ae376, type: 3}

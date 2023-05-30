@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int maxTotalAmmo;
     [SerializeField] private float reloadTime;
     [SerializeField] private UI ui;
+    [SerializeField] Animator animator;
     private int loadedAmmo;
     private int totalAmmo;
     private float attackTime = 0;
@@ -34,20 +35,27 @@ public class Weapon : MonoBehaviour
             }
             if (loadedAmmo <= 0)
             {
+                animator.SetBool("Shooting", false);
                 StartCoroutine(Reload());
                 return;
             }
             if (Input.GetKey(KeyCode.R) && loadedAmmo < maxLoadedAmmo && totalAmmo > 0)
             {
+                animator.SetBool("Shooting", false);
                 StartCoroutine(Reload());
                 return;
             }
             if (Input.GetKey(KeyCode.Mouse0) && loadedAmmo > 0)
             {
+                animator.SetBool("Shooting", true);
                 var attackObject = Instantiate(attackObjectPrefab, attackObjectSpawn.position, attackObjectSpawn.rotation);
                 attackObject.GetComponent<Rigidbody>().velocity = attackObjectSpawn.forward * attackObjectSpeed;
                 loadedAmmo--;
                 attackTime = 0.5f;
+            }
+            else
+            {
+                animator.SetBool("Shooting", false);
             }
             ui.SetAmmo(loadedAmmo, totalAmmo);
         }
@@ -78,8 +86,12 @@ public class Weapon : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
+        animator.SetBool("Reloading", true);
+        yield return new WaitForSeconds(reloadTime - 0.25f);
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(0.25f);
         isReloading = false;
+        
         if (loadedAmmo > 0)
         {
             totalAmmo -= maxLoadedAmmo - loadedAmmo;
