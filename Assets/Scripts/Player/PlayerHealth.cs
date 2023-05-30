@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
             GetComponent<Respawn>().Spawn();
             currentHealth = startingHealth;
             ui.SetMaxHealth(startingHealth);
+            GetComponent<Weapon>().ResetAmmo();
         }
     }
 }

@@ -56,13 +56,40 @@ public class Weapon : MonoBehaviour
             attackTime -= Time.deltaTime;
         }
     }
+    
+    public void ResetAmmo()
+    {
+        loadedAmmo = maxLoadedAmmo;
+        totalAmmo = maxTotalAmmo;
+        ui.SetAmmo(loadedAmmo, totalAmmo);
+    }
+    
+    public void AddAmmo(int ammoAmount)
+    {
+        totalAmmo = Mathf.Clamp(totalAmmo + ammoAmount, 0, maxTotalAmmo);
+        ui.SetAmmo(loadedAmmo, totalAmmo);
+    }
+    
+    public bool IsFullAmmo()
+    {
+        return totalAmmo == maxTotalAmmo;
+    }
 
     IEnumerator Reload()
     {
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
-        loadedAmmo = maxLoadedAmmo;
-        totalAmmo -= maxLoadedAmmo;
+        if (loadedAmmo > 0)
+        {
+            totalAmmo -= maxLoadedAmmo - loadedAmmo;
+            loadedAmmo = maxLoadedAmmo;
+        }
+        else
+        {
+            loadedAmmo = maxLoadedAmmo;
+            totalAmmo -= maxLoadedAmmo;
+        }
+        
     }
 }
