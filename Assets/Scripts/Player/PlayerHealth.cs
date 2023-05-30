@@ -29,4 +29,17 @@ public class PlayerHealth : MonoBehaviour
             GetComponent<Weapon>().ResetAmmo();
         }
     }
+    
+    public void Heal(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, startingHealth);
+        ui.SetHealth(currentHealth);
+    }
+    
+    public void UpgradeHealth(int amount)
+    {
+        startingHealth += amount;
+        currentHealth += amount;
+        ui.SetMaxHealth(currentHealth);
+    }
 }

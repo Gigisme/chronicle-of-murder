@@ -53,6 +53,8 @@ GameObject:
   - component: {fileID: 1622198392}
   - component: {fileID: 1622198393}
   - component: {fileID: 961420052}
+  - component: {fileID: 1622198407}
+  - component: {fileID: 1622198408}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -265,11 +267,13 @@ MonoBehaviour:
   attackObjectSpawn: {fileID: 1693896209}
   attackObjectPrefab: {fileID: 5090784020690280112, guid: c481dc56c24a8354da7eaa1d3597c751, type: 3}
   attackObjectSpeed: 30
+  damage: 1
   maxLoadedAmmo: 10
   maxTotalAmmo: 30
   reloadTime: 1
   ui: {fileID: 0}
   animator: {fileID: 493379374}
+  attackTimeBase: 0.5
 --- !u!114 &1622198393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +301,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 50
   ui: {fileID: 0}
+--- !u!114 &1622198407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735541724918142327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d727385a269d198904632ba120c3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  tillNextLevel: 10
+--- !u!114 &1622198408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735541724918142327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932fc634400ece137ad6593f736dbb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradesMenuUI: {fileID: 0}
+  damageUpgrade: 1
+  speedUpgrade: 0.05
+  healthUpgrade: 5
 --- !u!1 &6735541726139870325
 GameObject:
   m_ObjectHideFlags: 0
