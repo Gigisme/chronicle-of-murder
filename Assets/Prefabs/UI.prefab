@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 924011168262032477}
+  ammoText: {fileID: 6890004375994084580}
 --- !u!1 &3710831535305191310
 GameObject:
   m_ObjectHideFlags: 0

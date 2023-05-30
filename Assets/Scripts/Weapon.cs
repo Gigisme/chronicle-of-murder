@@ -37,6 +37,11 @@ public class Weapon : MonoBehaviour
                 StartCoroutine(Reload());
                 return;
             }
+            if (Input.GetKey(KeyCode.R) && loadedAmmo < maxLoadedAmmo && totalAmmo > 0)
+            {
+                StartCoroutine(Reload());
+                return;
+            }
             if (Input.GetKey(KeyCode.Mouse0) && loadedAmmo > 0)
             {
                 var attackObject = Instantiate(attackObjectPrefab, attackObjectSpawn.position, attackObjectSpawn.rotation);
@@ -54,7 +59,6 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
-        Debug.Log("Reloading...");
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         isReloading = false;
